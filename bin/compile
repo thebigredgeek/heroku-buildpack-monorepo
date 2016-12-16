@@ -15,10 +15,13 @@ APP_BASE=$(cat ${ENV_DIR}/APP_BASE)
 
 (
     stage=`mktemp -d` &&
+    echo "staged ${stage}" &&
     mv ${BUILD_DIR}/${APP_BASE} ${stage} &&
+    echo "mved ${BUILD_DIR}/${APP_BASE} ${stage}" &&
     shopt -s dotglob nullglob &&
     rm -rf ${BUILD_DIR}/* &&
-    mv ${stage}/${APP_BASE}/* ${BUILD_DIR}
+    mv ${stage}/${APP_BASE}/* ${BUILD_DIR} &&
+    echo "mvd ${stage}/${APP_BASE}/* ${BUILD_DIR}"
 )
 
 if ! [ $? ]; then
